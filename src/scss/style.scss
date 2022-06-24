@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@mixin transition() {
+  @apply transition-all duration-500;
+}
+
+body {
+  font-size: 14px;
+  font-weight: normal;
+  font-family: "Montserrat";
+  @apply bg-black;
+
+  .wrap {
+    @apply relative w-full overflow-hidden;
+    height: calc(100vh - 50px);
+    @screen lg {
+      height: 100vh;
+    }
+  }
+  .c-loader-bg {
+    //display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    background-color: black;
+  }
+  .c-loader-dot {
+    @apply flex items-center justify-start gap-4;
+    pointer-events: none;
+  }
+  .c-loader-dot > span {
+    @apply bg-slate-300 block;
+    display: block;
+    width: 10px;
+    height: 10px;
+  }
+  .js-contents {
+    @apply relative w-full;
+    transition: all 2s ease-out;
+    height: 100vh;
+  }
+  .bg {
+    @apply w-full h-full block left-0 top-0 fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: -1;
+    &::before {
+      @apply absolute top-0 left-0 w-full h-full;
+      content: "";
+      background-color: rgba(0,0,0,0.9);
+      @screen lg {
+        background-color: rgba(0,0,0,0.9);
+      }
+      z-index: 0;
+    }
+  }
+  .logo {
+    @apply absolute left-1/2 top-1/2 w-3/4 flex justify-center flex-wrap;
+    transform: translate(-50%, -50%)!important;
+    max-width: 400px;
+
+    &__title {
+      @apply mb-6 w-1/2 fill-white;
+    }
+    &__text {
+      @apply w-full;
+    }
+  }
+  .contact {  
+    @apply text-white text-center absolute bottom-32 left-1/2;
+    transform: translate(-50%, 0%);
+    dt {
+      font-weight: bold;
+      line-height: 3;
+    }
+    a {
+      @apply text-gray-400;
+      @include transition;
+      &:hover {
+        @apply text-white;
+      }
+    }
+  }
+  address {
+    @apply text-center absolute bottom-8 left-1/2 text-gray-400;
+    transform: translate(-50%, 0%);
+    font-size: 13px;
+    font-style: normal;
+  }
+  .container {
+    max-width: 100%;
+    @apply w-full absolute left-0 top-1/2 overflow-hidden;
+    transform: translate(0%, -50%);
+    z-index: -1;
+  }
+  
+  /* スライダーのwrapper */
+  .infinite-slider .swiper-wrapper {
+    transition-timing-function: linear;
+  }
+  
+  /* スライド */
+  .infinite-slider .swiper-slide {
+    height: 200px;
+    width: auto !important;
+    @screen lg {
+      height: 340px !important; /* 高さを指定 */
+    }
+  }
+  
+  /* スライド内の画像 */
+  .infinite-slider .swiper-slide svg {
+    width: auto;
+    height: 100%;
+  }
+}
+@media screen and (max-width:767px) and (orientation: landscape) {
+  .contact {
+    @apply hidden;
+  }
+}
